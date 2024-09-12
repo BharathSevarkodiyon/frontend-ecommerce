@@ -10,14 +10,12 @@ export const OrderProvider = ({ children }) => {
   // creating a order details (checkout)
   const createOrder = async (orderData) => {
     try {
-      const response = await axios.post(`https://backend-ecommerce-wqir.onrender.com/api/orders`, orderData, 
-      //   {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      const response = await axios.post(`https://backend-ecommerce-wqir.onrender.com/api/orders`, orderData, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       if (response.status === 201) {
         setOrders(response.data);
         // Update orders state after creation
@@ -33,14 +31,12 @@ export const OrderProvider = ({ children }) => {
   // to show all the order (viewOrder)
   const fetchOrders = useCallback(async () => {
     try {
-      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders`, 
-      //   {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders`, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       return response.data;
       // setOrders(response.data);
     } catch (error) {
@@ -54,14 +50,12 @@ export const OrderProvider = ({ children }) => {
     try {
       const response = await axios.put(`https://backend-ecommerce-wqir.onrender.com/api/orders/${orderId}`, {
         status: updatedStatus,
-      }, 
-      // {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      }, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       return response.data;
     } catch (error) {
       console.error("Failed to update order status", error);
@@ -71,14 +65,12 @@ export const OrderProvider = ({ children }) => {
 
   const fetchOrdersById = useCallback(async (orderId) => {
     try {
-      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders/${orderId}`, 
-      //   {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders/${orderId}`, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       return response.data;
       // setOrders(response.data);
     } catch (error) {

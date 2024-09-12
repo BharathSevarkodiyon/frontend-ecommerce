@@ -26,13 +26,12 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.post(
         "https://backend-ecommerce-wqir.onrender.com/api/product/",
-        newProduct, 
-        // {
-        //   withCredentials: true,
-        //   headers: {
-        //     'Cookie': document.cookie
-        //   }
-        // }
+        newProduct, {
+          withCredentials: true,
+          headers: {
+            'Cookie': document.cookie
+          }
+        }
       );
       setProducts((prevProducts) => [...prevProducts, response.data]); // Add the new product to the state
     } catch (error) {
@@ -45,13 +44,12 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.put(
         `https://backend-ecommerce-wqir.onrender.com/api/product/${productId}`,
-        updatedProduct, 
-        // {
-        //   withCredentials: true,
-        //   headers: {
-        //     'Cookie': document.cookie
-        //   }
-        // }
+        updatedProduct, {
+          withCredentials: true,
+          headers: {
+            'Cookie': document.cookie
+          }
+        }
       );
       setProducts((prevProducts) =>
         prevProducts.map(
@@ -66,14 +64,12 @@ export const ProductProvider = ({ children }) => {
   // Delete a product by ID
   const deleteProductById = async (productId) => {
     try {
-      await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/product/${productId}`, 
-      //   {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/product/${productId}`, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product.id !== productId)
       ); // Remove the deleted product from the state
@@ -86,13 +82,12 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.post(
         "https://backend-ecommerce-wqir.onrender.com/api/productCategory/",
-        categoryData, 
-        // {
-        //   withCredentials: true,
-        //   headers: {
-        //     'Cookie': document.cookie
-        //   }
-        // }
+        categoryData, {
+          withCredentials: true,
+          headers: {
+            'Cookie': document.cookie
+          }
+        }
       );
       return response.data; // Return the response data if needed
     } catch (error) {
@@ -103,14 +98,12 @@ export const ProductProvider = ({ children }) => {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/productCategory/", 
-      //   {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/productCategory/", {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching product categories", error);
@@ -119,14 +112,12 @@ export const ProductProvider = ({ children }) => {
 
   const fetchCategoryById = async (categoryId) => {
     try {
-      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${categoryId}`, 
-      //   {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${categoryId}`, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       return response.data;
     } catch (error) {
       console.error("Error fetching product category by ID", error);
@@ -137,13 +128,12 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.put(
         `https://backend-ecommerce-wqir.onrender.com/api/productCategory/${id}`,
-        updatedData, 
-        // {
-        //   withCredentials: true,
-        //   headers: {
-        //     'Cookie': document.cookie
-        //   }
-        // }
+        updatedData, {
+          withCredentials: true,
+          headers: {
+            'Cookie': document.cookie
+          }
+        }
       );
       return response.data; // Return the response data if needed
     } catch (error) {
@@ -154,14 +144,12 @@ export const ProductProvider = ({ children }) => {
 
   const deleteCategory = async (id) => {
     try {
-      await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${id}`, 
-      //   {
-      //   withCredentials: true,
-      //   headers: {
-      //     'Cookie': document.cookie
-      //   }
-      // }
-    );
+      await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${id}`, {
+        withCredentials: true,
+        headers: {
+          'Cookie': document.cookie
+        }
+      });
       // No need to return anything if the deletion is successful
     } catch (error) {
       console.error("Error deleting product category", error);
