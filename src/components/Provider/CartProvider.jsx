@@ -18,10 +18,7 @@ export const CartProvider = ({ children }) => {
       setLoading(true); // Start loading when fetching cart
       // Fetch all cart details
       const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/viewcart", {
-        withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
+        withCredentials: true
       });
       const carts = response.data;
       setCartDetails(carts)
@@ -49,9 +46,6 @@ export const CartProvider = ({ children }) => {
         productDetails: [productDetails], // Add the first product
       }, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       // Fetch the cart again after creation to update the state
       getCart(userId);
@@ -66,9 +60,6 @@ export const CartProvider = ({ children }) => {
       // Fetch all carts to find the user's cart
       const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/viewcart", {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       const carts = response.data;
       const userCart = carts.find((cart) => cart.created_by === userId);
@@ -100,9 +91,6 @@ export const CartProvider = ({ children }) => {
           productDetails: updatedProductDetails,
         }, {
           withCredentials: true,
-          headers: {
-            'Cookie': document.cookie
-          }
         });
 
         // Refresh cart data after update
@@ -128,9 +116,6 @@ export const CartProvider = ({ children }) => {
       // Fetch all carts to find the user's cart
       const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/viewcart", {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       const carts = response.data;
       const userCart = carts.find((cart) => cart.created_by === userId);
@@ -145,9 +130,6 @@ export const CartProvider = ({ children }) => {
           productDetails: updatedProductDetails,
         }, {
           withCredentials: true,
-          headers: {
-            'Cookie': document.cookie
-          }
         });
 
         // Refresh cart after removal
@@ -165,9 +147,6 @@ export const CartProvider = ({ children }) => {
       // Clear the cart in the backend by cart ID
       await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/viewcart/${cartId}`, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       }); // Example endpoint
 
       // Clear the cart in the frontend state
