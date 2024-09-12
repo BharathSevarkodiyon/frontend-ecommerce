@@ -152,11 +152,11 @@ const BackNavigation = () => {
             {/* Cart Details */}
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/cart")}>
               <FaShoppingCart className="text-black h-6 w-6" />
-              {cartData && cartData.length > 0 && (
+              {/* {cartData && cartData.length > 0 && (
                 <span className="absolute top-6 right-54 inline-flex items-center justify-center w-4 h-4 text-xs font-bold leading-none text-white bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">
                   {cartData.length}
                 </span>
-              )}
+              )} */}
               <button className="text-black"> Cart </button>
             </div>
 

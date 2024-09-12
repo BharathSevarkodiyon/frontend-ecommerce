@@ -182,13 +182,13 @@ export const CartProvider = ({ children }) => {
   };
 
   // Load cart data on component mount
-  useEffect(() => {
+  // useEffect(() => {
   //   const userId = localStorage.getItem("userId"); // Assuming the user ID is stored in local storage
-    const userId = Cookies.get("user_id");
-    if (userId) {
-      getCart(userId); // Fetch cart details on mount
-    }
-  }, [getCart]);
+  //   const userId = Cookies.get("user_id");
+  //   if (userId) {
+  //     getCart(userId); // Fetch cart details on mount
+  //   }
+  // }, [getCart]);
 
 
   // useEffect(() => {
