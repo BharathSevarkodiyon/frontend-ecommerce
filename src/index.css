@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    /* .no-arrows { */
+      /* Hide the spinners in WebKit browsers (Chrome, Safari) */
+      /* &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        @apply appearance-none;
+        margin: 0;
+      } */
+      /* Hide the spinners in Firefox */
+      /* & {
+        @apply [appearance:textfield];
+      } */
+    /* } */
+  }
