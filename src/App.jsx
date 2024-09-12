@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./components/Provider/CartProvider";
 import { AuthProvider } from "./components/Provider/AuthContext";
 import { ProductProvider } from "./components/Provider/ProductProvider";
@@ -19,7 +19,7 @@ import Navbar from "./components/navbar/Navbar";
 function App() {
   return (
     <div className="md:w-screen">
-      <BrowserRouter>
+      <HashRouter>
         <AuthProvider>
           <ProductProvider>
             <CartProvider>
@@ -48,7 +48,7 @@ function App() {
             </CartProvider>
           </ProductProvider>
         </AuthProvider>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

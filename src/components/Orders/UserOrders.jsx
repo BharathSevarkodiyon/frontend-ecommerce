@@ -21,7 +21,7 @@ const UserOrders = () => {
   // Fetch orders from API
   const fetchOrders = useCallback(async () => {
     try {
-      const response = await axios.get(`https://ecommerce-backend-2wdw.onrender.com/api/orders`, {
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders`, {
         withCredentials: true,
         headers: {
           'Cookie': document.cookie
