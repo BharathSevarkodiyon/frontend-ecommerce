@@ -10,11 +10,9 @@ const Home = () => {
   const { user } = useAuth(); // Get the user from AuthContext
 
   // Check the user role and display components accordingly
-  if (user && user.role === 'admin') {
-    return <AdminDashboard />; // Render AdminDashboard for admin users
-  } 
-
-  return (
+  (user && user.role === 'admin') ? (
+    <AdminDashboard />
+  ) : (
     <div>
       <ProductCategory />
       <ImageCarousel />
@@ -25,7 +23,9 @@ const Home = () => {
       <ProductList category="Appliances" />
       <Footer/>
     </div>
-  );
+  )
+  
+
 };
 
 export default Home;
