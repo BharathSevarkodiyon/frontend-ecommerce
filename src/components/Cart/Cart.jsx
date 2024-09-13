@@ -19,27 +19,26 @@ const Cart = () => {
   const searchParams = new URLSearchParams(location.search);
   const productId = searchParams.get("productId");
   const [cartInitialized, setCartInitialized] = useState(false);
-  const [isFetchingCart, setIsFetchingCart] = useState(true);
-  
+  const [isFetchingCart, setIsFetchingCart] = useState(true); // Loading state for fetching cart
+
   useEffect(() => {
     if (user) {
-      getCart(user._id)
-      .then(() => setIsFetchingCart(false));
-    } 
+      setIsFetchingCart(true); // Start loading
+      getCart(user._id).then(() => setIsFetchingCart(false)); // End loading after fetching cart
+    } else {
+      setIsFetchingCart(false); // End loading if user is not logged in
+    }
   }, [user, getCart]);
-  
+
   useEffect(() => {
     if (user && productId && !cartInitialized && !isFetchingCart) {
       const product = products.find((product) => product._id === productId);
-      console.log(product);
       if (product) {
         const productDetails = {
           product_id: product._id,
           orderedQuantity: 1,
           sellingPrice: product.sellingPrice.$numberDecimal,
         };
-        console.log("Cart pg");
-        
         addOrUpdateCartItem(user._id, productDetails);
         setCartInitialized(true);
       }
@@ -111,33 +110,33 @@ const Cart = () => {
   return (
     <div className="bg-purple-100 w-screen min-h-screen flex flex-col">
       <CartNavbar />
-      {console.log("cartData in cart",cartData)
-      }
       <div className="flex-grow mx-auto w-screen p-4 mt-[64px]">
         <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
         {isFetchingCart ? (
-          !user ? (
-            <Alert>
-              <AlertTitle>Please Login to your account</AlertTitle>
-              <AlertDescription>
-                You need to be logged in to view and manage your cart.
-              </AlertDescription>
-            </Alert>
-          ) : (
-            <div className="flex justify-center items-center space-x-4">
-                <Skeleton className="h-12 w-12 rounded-full" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px] md:w-[400px]" />
-                <Skeleton className="h-4 w-[180px] md:w-[300px]" />
-                <Skeleton className="h-4 w-[180px] md:w-[300px]" />
-              </div>
+          // Display loading skeleton while fetching cart data
+          <div className="flex justify-center items-center space-x-4">
+            <Skeleton className="h-12 w-12 rounded-full" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px] md:w-[400px]" />
+              <Skeleton className="h-4 w-[180px] md:w-[300px]" />
+              <Skeleton className="h-4 w-[180px] md:w-[300px]" />
             </div>
-          )
+          </div>
+        ) : !user ? (
+          // Show alert if user is not logged in
+          <Alert>
+            <AlertTitle>Please Login to your account</AlertTitle>
+            <AlertDescription>
+              You need to be logged in to view and manage your cart.
+            </AlertDescription>
+          </Alert>
         ) : cartData.length === 0 ? (
-            <Alert>
-              <AlertTitle>Your cart is empty.</AlertTitle>
-            </Alert>
+          // Show alert if the cart is empty
+          <Alert>
+            <AlertTitle>Your cart is empty.</AlertTitle>
+          </Alert>
         ) : (
+          // Display cart items
           <div>
             {cartData.map((item) => {
               const product = products.find((prod) => prod._id === item.product_id);
