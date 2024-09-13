@@ -11,7 +11,9 @@ const Home = () => {
 
   // Check the user role and display components accordingly
   (user && user.role === 'admin') ? (
-    <AdminDashboard />
+    <div>
+      <AdminDashboard />
+    </div>
   ) : (
     <div>
       <ProductCategory />
