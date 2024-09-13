@@ -1,67 +1,72 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../Provider/AuthContext";
 import { useOrders } from "../Provider/OrderProvider";
-import { useCart } from "../Provider/CartProvider"; // Import Cart Context
+import { useCart } from "../Provider/CartProvider";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BsCheckCircle } from "react-icons/bs"; // Import Green Tick Icon
+import { BsCheckCircle } from "react-icons/bs";
 import { useProducts } from "../Provider/ProductProvider";
 import CartNavbar from "../navbar/CartNavbar";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton"; // Import Skeleton from shadcn
 
 const Orders = () => {
   const { user } = useAuth();
   const { orders } = useOrders();
   const { products } = useProducts();
-  const { getCart, clearCart, cartDetails } = useCart(); // Use Cart context to get cart details and clearCart
+  const { getCart, clearCart, cartDetails } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [loading, setLoading] = useState(true); // State for loading
   const [orderItems, setOrderItems] = useState([]);
-  const [totalAmount, setTotalAmount] = useState(0); // State to hold the total order amount
+  const [totalAmount, setTotalAmount] = useState(0);
   const searchParams = new URLSearchParams(location.search);
   const cartId = searchParams.get("cartId");
 
   useEffect(() => {
     if (user && cartId) {
-      getCart(user._id); // Fetch user's cart details
-
-      // Find and display order items
-      const specificCart = cartDetails.find(
-        (cart) => cart._id === cartId && cart.created_by === user._id
-      );
-
-      if (specificCart) {
-        const updatedOrder = specificCart.productDetails.map((orderItem) => {
-          const product = products.find((p) => p._id === orderItem.product_id);
-
-          return {
-            // order_Id: orders._id,
-            product_id: orderItem.product_id,
-            productName: product ? product.productName : "Unknown Product",
-            orderedQuantity: orderItem.orderedQuantity,
-            sellingPrice: product ? orderItem.sellingPrice : "0.00",
-            mainImage: product ? product.mainImage : "",
-            individualPrice: product
-              ? (orderItem.sellingPrice / orderItem.orderedQuantity).toFixed(2)
-              : "0.00", // Calculate individual product price
-          };
-        });
-        setOrderItems(updatedOrder);
-
-        // Calculate the total amount for the order
-        const total = updatedOrder.reduce(
-          (sum, item) => sum + item.sellingPrice,
-          0
+      setLoading(true); // Set loading to true while fetching data
+      getCart(user._id).then(() => {
+        // Find and display order items
+        const specificCart = cartDetails.find(
+          (cart) => cart._id === cartId && cart.created_by === user._id
         );
-        setTotalAmount(total.toFixed(2)); // Set the total amount with two decimal points
 
-        // Clear the cart after displaying order items
-        clearCart(specificCart._id); // Pass cart ID to clearCart function
-      }
+        if (specificCart) {
+          const updatedOrder = specificCart.productDetails.map((orderItem) => {
+            const product = products.find(
+              (p) => p._id === orderItem.product_id
+            );
+
+            return {
+              product_id: orderItem.product_id,
+              productName: product ? product.productName : "Unknown Product",
+              orderedQuantity: orderItem.orderedQuantity,
+              sellingPrice: product ? orderItem.sellingPrice : "0.00",
+              mainImage: product ? product.mainImage : "",
+              individualPrice: product
+                ? (orderItem.sellingPrice / orderItem.orderedQuantity).toFixed(
+                    2
+                  )
+                : "0.00", // Calculate individual product price
+            };
+          });
+          setOrderItems(updatedOrder);
+
+          // Calculate the total amount for the order
+          const total = updatedOrder.reduce(
+            (sum, item) => sum + item.sellingPrice,
+            0
+          );
+          setTotalAmount(total.toFixed(2));
+
+          // Clear the cart after displaying order items
+          clearCart(specificCart._id);
+        }
+        setLoading(false); // Set loading to false after fetching data
+      });
     }
   }, [user, cartId, products]);
-
-  // console.log(orderItems);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -81,20 +86,26 @@ const Orders = () => {
           </div>
         )}
 
-        {orders.length === 0 ? (
+        {/* Display loading skeleton when loading is true */}
+        {loading ? (
+          <div className="space-y-4">
+            <Skeleton className="h-8 w-1/2 mx-auto" /> {/* Skeleton for heading */}
+            <Skeleton className="h-24 w-full" /> {/* Skeleton for order block */}
+            <Skeleton className="h-24 w-full" /> {/* Skeleton for order block */}
+            <Skeleton className="h-12 w-1/3 mx-auto" /> {/* Skeleton for total amount */}
+          </div>
+        ) : orders.length === 0 ? (
           <Alert>
             <AlertTitle>No orders found.</AlertTitle>
           </Alert>
         ) : (
           <div>
             {/* Display Order ID once */}
-            {
-              <div className="bg-white shadow-md p-5">
-                <h2 className="md:text-lg lg:text-xl font-semibold text-gray-700">
-                  Order ID: <span className="font-normal">{orders._id}</span>
-                </h2>
-              </div>
-            }
+            <div className="bg-white shadow-md p-5">
+              <h2 className="md:text-lg lg:text-xl font-semibold text-gray-700">
+                Order ID: <span className="font-normal">{orders._id}</span>
+              </h2>
+            </div>
 
             <div>
               {/* Display ordered products */}
