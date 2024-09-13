@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
         setCartId(userCart._id);
         setCartData(userCart.productDetails); // Set product details in state
       } else {
-        console.log("No cart found for this user.");
+        // console.log("No cart found for this user.");
         setCartData([]); // Reset cart data if no cart is found
       }
       setLoading(false); // Stop loading after the fetch operation is completed
@@ -65,25 +65,25 @@ export const CartProvider = ({ children }) => {
       const userCart = carts.find((cart) => cart.created_by === userId);
 
       if (userCart) {
-        console.log("got the userCart Details: ", userCart);
+        // console.log("got the userCart Details: ", userCart);
         
         const cartId = userCart._id; // Get the cart ID for the user
         const existingProductIndex = userCart.productDetails.findIndex(
           (item) => item.product_id === productDetails.product_id
         );
-        console.log("Existing: ", existingProductIndex);
+        // console.log("Existing: ", existingProductIndex);
 
         let updatedProductDetails;
         if (existingProductIndex >= 0) {
           // Update quantity if product already exists in the cart
           updatedProductDetails = [...userCart.productDetails];
-          console.log("updated product details: ",updatedProductDetails);
+          // console.log("updated product details: ",updatedProductDetails);
           
           updatedProductDetails[existingProductIndex].orderedQuantity = productDetails.orderedQuantity;
         } else {
           // Add new product if it does not exist
           updatedProductDetails = [...userCart.productDetails, productDetails];
-          console.log("else block of update product details: ", updatedProductDetails);
+          // console.log("else block of update product details: ", updatedProductDetails);
           
         }
 
@@ -135,7 +135,7 @@ export const CartProvider = ({ children }) => {
         // Refresh cart after removal
         getCart(userId);
       } else {
-        console.log("No cart found for this user to remove item from.");
+        // console.log("No cart found for this user to remove item from.");
       }
     } catch (error) {
       console.error("Error removing cart item", error);

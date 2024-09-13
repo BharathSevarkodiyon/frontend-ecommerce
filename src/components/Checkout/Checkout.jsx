@@ -109,14 +109,11 @@ const Checkout = () => {
         address,
         {
           withCredentials: true,
-          headers: {
-            Cookie: document.cookie,
-          },
         }
       );
       updateUser({ ...user, ...response.data });
       setShowAddressPopup(false);
-      console.log("Address updated successfully");
+      // console.log("Address updated successfully");
     } catch (error) {
       console.error("Failed to update address", error);
     }
@@ -134,7 +131,7 @@ const Checkout = () => {
       user.city &&
       user.pincode
     ) {
-      console.log(`Proceed to payment with ${paymentMethod}`);
+      // console.log(`Proceed to payment with ${paymentMethod}`);
       try {
         const orderData = {
           created_by: user._id,

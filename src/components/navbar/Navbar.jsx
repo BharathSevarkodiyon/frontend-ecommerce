@@ -79,7 +79,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="fixed top-0 left-0 w-full bg-gray-800 shadow-lg z-50 mb-16">
+      <nav className="fixed top-0 left-0 w-full bg-red-800 shadow-lg z-50 mb-16">
         <div className="container mx-auto flex items-center justify-between py-3 px-4">
           {/* Left section: Logo */}
           <div className="flex items-center space-x-4">

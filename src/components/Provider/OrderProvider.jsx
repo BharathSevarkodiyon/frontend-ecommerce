@@ -17,7 +17,7 @@ export const OrderProvider = ({ children }) => {
         setOrders(response.data);
         // Update orders state after creation
         // fetchOrders(); // Refresh orders after successful creation
-        console.log("Order created successfully!");
+        // console.log("Order created successfully!");
       }
     } catch (error) {
       console.error("Error creating order", error);

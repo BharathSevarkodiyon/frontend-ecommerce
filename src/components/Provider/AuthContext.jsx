@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       try {
         const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/user/${userId}`);
-        console.log(response.data);
+        // console.log(response.data);
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.set("user_role", userData.role, { expires: 0.25, sameSite: 'Lax' });
         Cookies.set("authToken", userToken, { expires: 0.25, sameSite: 'Lax' });
         
-        console.log(userData);
+        // console.log(userData);
         // console.log(response.data.token);
         setLoading(false);
   
@@ -118,9 +118,6 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("authToken");
     await axios.post("https://backend-ecommerce-wqir.onrender.com/logout", {
       withCredentials: true,
-      headers: {
-        'Cookie': document.cookie
-      }
     });
   };
 

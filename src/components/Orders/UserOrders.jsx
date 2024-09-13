@@ -34,9 +34,6 @@ const UserOrders = () => {
         `https://backend-ecommerce-wqir.onrender.com/api/orders`,
         {
           withCredentials: true,
-          headers: {
-            Cookie: document.cookie,
-          },
         }
       );
       return response.data;

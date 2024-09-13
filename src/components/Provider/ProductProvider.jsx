@@ -11,9 +11,6 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/product/", {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       setProducts(response.data);
     } catch (error) {
@@ -28,9 +25,6 @@ export const ProductProvider = ({ children }) => {
         "https://backend-ecommerce-wqir.onrender.com/api/product/",
         newProduct, {
           withCredentials: true,
-          headers: {
-            'Cookie': document.cookie
-          }
         }
       );
       setProducts((prevProducts) => [...prevProducts, response.data]); // Add the new product to the state
@@ -46,9 +40,6 @@ export const ProductProvider = ({ children }) => {
         `https://backend-ecommerce-wqir.onrender.com/api/product/${productId}`,
         updatedProduct, {
           withCredentials: true,
-          headers: {
-            'Cookie': document.cookie
-          }
         }
       );
       setProducts((prevProducts) =>
@@ -66,9 +57,6 @@ export const ProductProvider = ({ children }) => {
     try {
       await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/product/${productId}`, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product.id !== productId)
@@ -84,9 +72,6 @@ export const ProductProvider = ({ children }) => {
         "https://backend-ecommerce-wqir.onrender.com/api/productCategory/",
         categoryData, {
           withCredentials: true,
-          headers: {
-            'Cookie': document.cookie
-          }
         }
       );
       return response.data; // Return the response data if needed
@@ -100,9 +85,6 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/productCategory/", {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       setCategories(response.data);
     } catch (error) {
@@ -114,9 +96,6 @@ export const ProductProvider = ({ children }) => {
     try {
       const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${categoryId}`, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       return response.data;
     } catch (error) {
@@ -130,9 +109,6 @@ export const ProductProvider = ({ children }) => {
         `https://backend-ecommerce-wqir.onrender.com/api/productCategory/${id}`,
         updatedData, {
           withCredentials: true,
-          headers: {
-            'Cookie': document.cookie
-          }
         }
       );
       return response.data; // Return the response data if needed
@@ -146,9 +122,6 @@ export const ProductProvider = ({ children }) => {
     try {
       await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${id}`, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       // No need to return anything if the deletion is successful
     } catch (error) {
