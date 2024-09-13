@@ -30,6 +30,9 @@ function App() {
 function AppContent() {
   const { user } = useAuth();
 
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  console.log(baseUrl);
+
   return (
     <ProductProvider>
       <CartProvider>
