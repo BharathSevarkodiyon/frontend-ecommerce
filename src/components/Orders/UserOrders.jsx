@@ -15,6 +15,8 @@ const UserOrders = () => {
   const [orderItems, setOrderItems] = useState([]);
   const [loading, setLoading] = useState(true); // State for loading
 
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   // Function to format the date
   const formatDate = (dateString) => {
     const options = {
@@ -31,7 +33,7 @@ const UserOrders = () => {
   const fetchOrders = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://backend-ecommerce-wqir.onrender.com/api/orders`,
+        `${baseUrl}/api/orders`,
         {
           withCredentials: true,
         }

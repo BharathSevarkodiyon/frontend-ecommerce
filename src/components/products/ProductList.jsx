@@ -55,11 +55,20 @@ const ProductList = ({ category }) => {
   const displayedProductsLarge = filteredProducts.slice(0, 5); // Show 5 products on large screens
 
   return (
-    <div className="p-5 bg-purple-100">
-      {/* Heading */}
-      <h2 className="text-2xl font-bold mb-8 text-center text-gray-900 bg-violet-200 py-3 rounded-md">
-        {category}
-      </h2>
+    <div className="p-5 bg-purple-100 font-roboto"> {/* Add font-roboto class */}
+      {/* Category Name and View More Button */}
+      <div className="flex justify-between items-center mb-8 bg-violet-200 py-3 px-4 rounded-md">
+        {/* Category Name */}
+        <h2 className="text-2xl font-bold text-gray-900">{category}</h2>
+        {/* View More Button */}
+        <button
+          onClick={handleViewMoreClick}
+          className="flex items-center bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 shadow-lg"
+        >
+          View More
+          <HiArrowRight className="ml-2 text-lg" />
+        </button>
+      </div>
 
       {/* Loading */}
       {loading ? (
@@ -74,7 +83,7 @@ const ProductList = ({ category }) => {
         // Product Image Grid
         <>
           {/* Small screens: 2 products per row */}
-          <div className="grid grid-cols-2 gap-6 mb-6 sm:hidden">
+          <div className="grid grid-cols-2 gap-6 mb-6 sm:hidden font-roboto">
             {displayedProductsSmall.map((product, index) => (
               <div
                 key={index}
@@ -94,7 +103,7 @@ const ProductList = ({ category }) => {
           </div>
 
           {/* Medium screens: 3 products per row */}
-          <div className="hidden md:grid grid-cols-3 gap-6 mb-6 sm:hidden lg:hidden">
+          <div className="hidden md:grid grid-cols-3 gap-6 mb-6 sm:hidden lg:hidden font-roboto">
             {displayedProductsMedium.map((product, index) => (
               <div
                 key={index}
@@ -114,7 +123,7 @@ const ProductList = ({ category }) => {
           </div>
 
           {/* Large screens: 5 products in a single row */}
-          <div className="hidden lg:grid grid-cols-5 gap-6 mb-6 md:hidden">
+          <div className="hidden lg:grid grid-cols-5 gap-6 mb-6 md:hidden font-roboto">
             {displayedProductsLarge.map((product, index) => (
               <div
                 key={index}
@@ -131,17 +140,6 @@ const ProductList = ({ category }) => {
                 </p>
               </div>
             ))}
-          </div>
-
-          {/* View More Button */}
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={handleViewMoreClick}
-              className="flex items-center bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-300 shadow-lg"
-            >
-              View More
-              <HiArrowRight className="ml-2 text-lg" />
-            </button>
           </div>
         </>
       )}

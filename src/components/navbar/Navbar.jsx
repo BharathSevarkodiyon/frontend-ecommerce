@@ -79,7 +79,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="fixed top-0 left-0 w-full bg-red-800 shadow-lg z-50 mb-16">
+      <nav className="fixed top-0 left-0 w-full bg-white shadow-lg z-50 mb-16">
         <div className="container mx-auto flex items-center justify-between py-3 px-4">
           {/* Left section: Logo */}
           <div className="flex items-center space-x-4">
@@ -88,7 +88,7 @@ const Navbar = () => {
               alt="Logo"
               className="h-10 w-10 rounded-3xl hover:scale-110"
             />
-            <span className="text-xl font-semibold text-white">BuzzBee</span>
+            <span className="text-xl font-semibold text-black">BuzzBee</span>
           </div>
 
           {/* Middle section: Search Bar (visible for md and above) */}
@@ -144,13 +144,13 @@ const Navbar = () => {
           <div className="flex items-center space-x-6">
             {/* Cart Details */}
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/cart")}>
-              <FaShoppingCart className="text-white h-6 w-6" />
+              <FaShoppingCart className="text-black h-6 w-6" />
               {/* {cartData && cartData.length > 0 && (
                 <span className="absolute top-6 right-54 inline-flex items-center justify-center w-4 h-4 text-xs font-bold leading-none text-white bg-red-600 rounded-full transform translate-x-1/2 -translate-y-1/2">
                   {cartData.length}
                 </span>
               )} */}
-              <button className="text-white"> Cart </button>
+              <button className="text-black"> Cart </button>
             </div>
 
             {/* Account Details / Login Button */}
@@ -158,10 +158,10 @@ const Navbar = () => {
               <div className="relative">
                 {/* User Information with Dropdown Toggle */}
                 <div className="flex items-center space-x-2 cursor-pointer" onClick={toggleDropdown}>
-                  <FaUser className="text-white h-6 w-6" />
-                  <span className="text-white w-[68px] flex flex-wrap">Welcome, {user.firstName}</span>
+                  <FaUser className="text-black h-6 w-6" />
+                  <span className="text-black w-[68px] flex flex-wrap">Welcome, {user.firstName}</span>
                   <FaChevronDown
-                    className={`text-white h-4 w-4 transition-transform duration-200 ${
+                    className={`text-black h-4 w-4 transition-transform duration-200 ${
                       dropdownOpen ? "transform rotate-180" : ""
                     }`}
                   />
@@ -188,7 +188,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="text-white px-4 py-2 rounded-md hover:bg-white hover:text-black focus:outline-none"
+                className="text-black px-4 py-2 rounded-md hover:bg-black hover:text-white focus:outline-none"
               >
                 Login / Signup
               </Link>

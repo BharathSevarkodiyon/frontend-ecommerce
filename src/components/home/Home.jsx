@@ -5,17 +5,19 @@ import ProductList from '../products/ProductList';
 import Footer from '../Footer/Footer';
 import { useAuth } from '../Provider/AuthContext';
 import AdminDashboard from '../Admin/Home/AdminDashboard';
+import Navbar from '../navbar/Navbar';
 
 const Home = () => {
   const { user } = useAuth(); // Get the user from AuthContext
 
   // Check the user role and display components accordingly
-  (user && user.role === 'admin') ? (
+  if (user && user.role === 'admin') {
+    return <AdminDashboard />; // Render AdminDashboard for admin users
+  } 
+
+  return (
     <div>
-      <AdminDashboard />
-    </div>
-  ) : (
-    <div>
+      <Navbar/>
       <ProductCategory />
       <ImageCarousel />
       <ProductList category="Mobile" />
@@ -25,9 +27,7 @@ const Home = () => {
       <ProductList category="Appliances" />
       <Footer/>
     </div>
-  )
-  
-
+  );
 };
 
 export default Home;

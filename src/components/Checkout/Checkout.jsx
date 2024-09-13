@@ -19,6 +19,8 @@ const Checkout = () => {
   const { id: cartId } = useParams();
   const navigate = useNavigate();
 
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -105,7 +107,7 @@ const Checkout = () => {
   const handleAddressSubmit = async () => {
     try {
       const response = await axios.patch(
-        `https://backend-ecommerce-wqir.onrender.com/user/${user._id}`,
+        `${baseUrl}/user/${user._id}`,
         address,
         {
           withCredentials: true,

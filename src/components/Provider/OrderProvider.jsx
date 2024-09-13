@@ -7,10 +7,12 @@ const OrderContext = createContext();
 export const OrderProvider = ({ children }) => {
   const [orders, setOrders] = useState([]);
 
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   // creating a order details (checkout)
   const createOrder = async (orderData) => {
     try {
-      const response = await axios.post(`https://backend-ecommerce-wqir.onrender.com/api/orders`, orderData, {
+      const response = await axios.post(`${baseUrl}/api/orders`, orderData, {
         withCredentials: true,
       });
       if (response.status === 201) {
@@ -28,7 +30,7 @@ export const OrderProvider = ({ children }) => {
   // to show all the order (viewOrder)
   const fetchOrders = useCallback(async () => {
     try {
-      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders`, {
+      const response = await axios.get(`${baseUrl}/api/orders`, {
         withCredentials: true,
       });
       return response.data;
@@ -42,7 +44,7 @@ export const OrderProvider = ({ children }) => {
   // to update the status of the order (viewOrder)
   const updateOrderStatus = async (orderId, updatedStatus) => {
     try {
-      const response = await axios.put(`https://backend-ecommerce-wqir.onrender.com/api/orders/${orderId}`, {
+      const response = await axios.put(`${baseUrl}/api/orders/${orderId}`, {
         status: updatedStatus,
       }, {
         withCredentials: true,
@@ -56,7 +58,7 @@ export const OrderProvider = ({ children }) => {
 
   const fetchOrdersById = useCallback(async (orderId) => {
     try {
-      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders/${orderId}`, {
+      const response = await axios.get(`${baseUrl}/api/orders/${orderId}`, {
         withCredentials: true,
       });
       return response.data;

@@ -7,9 +7,11 @@ export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   const fetchProducts = useCallback(async () => {
     try {
-      const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/product/", {
+      const response = await axios.get(`${baseUrl}/api/product/`, {
         withCredentials: true,
       });
       setProducts(response.data);
@@ -22,7 +24,7 @@ export const ProductProvider = ({ children }) => {
   const createProduct = async (newProduct) => {
     try {
       const response = await axios.post(
-        "https://backend-ecommerce-wqir.onrender.com/api/product/",
+        `${baseUrl}/api/product/`,
         newProduct, {
           withCredentials: true,
         }
@@ -37,7 +39,7 @@ export const ProductProvider = ({ children }) => {
   const updateProductById = async (productId, updatedProduct) => {
     try {
       const response = await axios.put(
-        `https://backend-ecommerce-wqir.onrender.com/api/product/${productId}`,
+        `${baseUrl}/api/product/${productId}`,
         updatedProduct, {
           withCredentials: true,
         }
@@ -55,7 +57,7 @@ export const ProductProvider = ({ children }) => {
   // Delete a product by ID
   const deleteProductById = async (productId) => {
     try {
-      await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/product/${productId}`, {
+      await axios.delete(`${baseUrl}/api/product/${productId}`, {
         withCredentials: true,
       });
       setProducts((prevProducts) =>
@@ -69,7 +71,7 @@ export const ProductProvider = ({ children }) => {
   const createCategory = async (categoryData) => {
     try {
       const response = await axios.post(
-        "https://backend-ecommerce-wqir.onrender.com/api/productCategory/",
+        `${baseUrl}/api/productCategory/`,
         categoryData, {
           withCredentials: true,
         }
@@ -83,7 +85,7 @@ export const ProductProvider = ({ children }) => {
 
   const fetchCategories = useCallback(async () => {
     try {
-      const response = await axios.get("https://backend-ecommerce-wqir.onrender.com/api/productCategory/", {
+      const response = await axios.get(`${baseUrl}/api/productCategory/`, {
         withCredentials: true,
       });
       setCategories(response.data);
@@ -94,7 +96,7 @@ export const ProductProvider = ({ children }) => {
 
   const fetchCategoryById = async (categoryId) => {
     try {
-      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${categoryId}`, {
+      const response = await axios.get(`${baseUrl}/api/productCategory/${categoryId}`, {
         withCredentials: true,
       });
       return response.data;
@@ -106,7 +108,7 @@ export const ProductProvider = ({ children }) => {
   const updateCategory = async (id, updatedData) => {
     try {
       const response = await axios.put(
-        `https://backend-ecommerce-wqir.onrender.com/api/productCategory/${id}`,
+        `${baseUrl}/api/productCategory/${id}`,
         updatedData, {
           withCredentials: true,
         }
@@ -120,7 +122,7 @@ export const ProductProvider = ({ children }) => {
 
   const deleteCategory = async (id) => {
     try {
-      await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/productCategory/${id}`, {
+      await axios.delete(`${baseUrl}/api/productCategory/${id}`, {
         withCredentials: true,
       });
       // No need to return anything if the deletion is successful
