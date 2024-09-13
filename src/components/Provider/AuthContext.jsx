@@ -25,9 +25,6 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/user`, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       // console.log(response.data);
       setAllUser(response.data);

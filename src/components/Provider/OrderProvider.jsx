@@ -12,9 +12,6 @@ export const OrderProvider = ({ children }) => {
     try {
       const response = await axios.post(`https://backend-ecommerce-wqir.onrender.com/api/orders`, orderData, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       if (response.status === 201) {
         setOrders(response.data);
@@ -33,9 +30,6 @@ export const OrderProvider = ({ children }) => {
     try {
       const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders`, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       return response.data;
       // setOrders(response.data);
@@ -52,9 +46,6 @@ export const OrderProvider = ({ children }) => {
         status: updatedStatus,
       }, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       return response.data;
     } catch (error) {
@@ -67,9 +58,6 @@ export const OrderProvider = ({ children }) => {
     try {
       const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/orders/${orderId}`, {
         withCredentials: true,
-        headers: {
-          'Cookie': document.cookie
-        }
       });
       return response.data;
       // setOrders(response.data);
