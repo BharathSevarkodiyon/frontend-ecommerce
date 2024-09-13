@@ -1,6 +1,5 @@
 import React from 'react';
 import { ImageCarousel } from '../carousel/ImageCarousel';
-import Navbar from '../navbar/Navbar';
 import ProductCategory from '../productCategory/ProductCategory';
 import ProductList from '../products/ProductList';
 import Footer from '../Footer/Footer';
@@ -12,12 +11,11 @@ const Home = () => {
 
   // Check the user role and display components accordingly
   if (user && user.role === 'admin') {
-    return <AdminDashboard />;
+    return <AdminDashboard />; // Render AdminDashboard for admin users
   } 
 
   return (
     <div>
-      <Navbar />
       <ProductCategory />
       <ImageCarousel />
       <ProductList category="Mobile" />
