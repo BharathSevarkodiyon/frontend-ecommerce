@@ -15,6 +15,8 @@ import UserOrders from "./components/Orders/UserOrders";
 import { Toaster } from "sonner";
 import NotFound from "./components/PageNotFound/NotFound";
 
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 function App() {
   return (
     <div className="md:w-screen">
@@ -30,7 +32,7 @@ function App() {
 function AppContent() {
   const { user } = useAuth();
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   console.log(baseUrl);
   
 
