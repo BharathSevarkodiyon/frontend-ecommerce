@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   const fetchUser = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${baseUrl}/user`, {
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/user`, {
         withCredentials: true,
       });
       // console.log(response.data);
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     const fetchUserById = useCallback(async (userId) => {
       setLoading(true);
       try {
-        const response = await axios.get(`${baseUrl}/user/${userId}`);
+        const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/user/${userId}`);
         // console.log(response.data);
         setUser(response.data);
       } catch (error) {
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
     const login = async (email, password) => {
       setLoading(true);
       try {
-        const response = await axios.post(`${baseUrl}/login`, { email, password });
+        const response = await axios.post(`https://backend-ecommerce-wqir.onrender.com/login`, { email, password });
         const userData = response.data.data;
         const userToken = response.data.token;
         setUser(userData);
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
   const signup = async (signupData) => {
     setLoading(true);
     try {
-      const response = await axios.post(`${baseUrl}/signup`, signupData);
+      const response = await axios.post(`https://backend-ecommerce-wqir.onrender.com/signup`, signupData);
       if (response.status === 201) {
         setUser(response.data);
         setLoading(false);
@@ -118,7 +118,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("user_id");
     Cookies.remove("user_role");
     Cookies.remove("authToken");
-    await axios.post(`${baseUrl}/logout`, {
+    await axios.post(`https://backend-ecommerce-wqir.onrender.com/logout`, {
       withCredentials: true,
     });
   };

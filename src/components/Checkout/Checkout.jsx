@@ -107,7 +107,7 @@ const Checkout = () => {
   const handleAddressSubmit = async () => {
     try {
       const response = await axios.patch(
-        `${baseUrl}/user/${user._id}`,
+        `https://backend-ecommerce-wqir.onrender.com/user/${user._id}`,
         address,
         {
           withCredentials: true,

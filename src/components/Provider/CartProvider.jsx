@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
     try {
       setLoading(true); // Start loading when fetching cart
       // Fetch all cart details
-      const response = await axios.get(`${baseUrl}/api/viewcart`, {
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/viewcart`, {
         withCredentials: true
       });
       const carts = response.data;
@@ -43,7 +43,7 @@ export const CartProvider = ({ children }) => {
   // Function to create a new cart if it doesn't exist
   const createCart = useCallback(async (userId, productDetails) => {
     try {
-      await axios.post(`${baseUrl}/api/viewcart`, {
+      await axios.post(`https://backend-ecommerce-wqir.onrender.com/api/viewcart`, {
         created_by: userId,
         productDetails: [productDetails], // Add the first product
       }, {
@@ -60,7 +60,7 @@ export const CartProvider = ({ children }) => {
   const updateCartItem = useCallback(async (userId, productDetails) => {
     try {
       // Fetch all carts to find the user's cart
-      const response = await axios.get(`${baseUrl}/api/viewcart`, {
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/viewcart`, {
         withCredentials: true,
       });
       const carts = response.data;
@@ -89,7 +89,7 @@ export const CartProvider = ({ children }) => {
           
         }
 
-        await axios.put(`${baseUrl}/api/viewcart/${cartId}`, {
+        await axios.put(`https://backend-ecommerce-wqir.onrender.com/api/viewcart/${cartId}`, {
           productDetails: updatedProductDetails,
         }, {
           withCredentials: true,
@@ -116,7 +116,7 @@ export const CartProvider = ({ children }) => {
   const removeCartItem = useCallback(async (userId, productId) => {
     try {
       // Fetch all carts to find the user's cart
-      const response = await axios.get(`${baseUrl}/api/viewcart`, {
+      const response = await axios.get(`https://backend-ecommerce-wqir.onrender.com/api/viewcart`, {
         withCredentials: true,
       });
       const carts = response.data;
@@ -128,7 +128,7 @@ export const CartProvider = ({ children }) => {
           (item) => item.product_id !== productId
         );
 
-        await axios.put(`${baseUrl}/api/viewcart/${cartId}`, {
+        await axios.put(`https://backend-ecommerce-wqir.onrender.com/api/viewcart/${cartId}`, {
           productDetails: updatedProductDetails,
         }, {
           withCredentials: true,
@@ -147,7 +147,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = async (cartId) => {
     try {
       // Clear the cart in the backend by cart ID
-      await axios.delete(`${baseUrl}/api/viewcart/${cartId}`, {
+      await axios.delete(`https://backend-ecommerce-wqir.onrender.com/api/viewcart/${cartId}`, {
         withCredentials: true,
       }); // Example endpoint
 

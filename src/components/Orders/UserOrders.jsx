@@ -33,7 +33,7 @@ const UserOrders = () => {
   const fetchOrders = useCallback(async () => {
     try {
       const response = await axios.get(
-        `${baseUrl}/api/orders`,
+        `https://backend-ecommerce-wqir.onrender.com/api/orders`,
         {
           withCredentials: true,
         }
