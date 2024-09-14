@@ -17,7 +17,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     // Simulate loading delay or data fetching
-    const timer = setTimeout(() => setLoading(false), 1000); // Replace with actual data fetching
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer); // Cleanup
   }, []);
 
@@ -35,12 +35,38 @@ const ProductDetails = () => {
 
       <div className="flex-grow max-w-screen-lg mx-auto p-5 mt-[120px] sm:mt-16">
         {loading ? (
-          <div className="flex justify-center items-center space-x-4">
-            <Skeleton className="h-12 w-12 rounded-full" />
-            <div className="space-y-2">
-              <Skeleton className="h-20 w-[200px] md:w-[400px]" />
-              <Skeleton className="h-4 w-[200px]" />
-              <Skeleton className="h-4 w-[200px]" />
+          <div className="flex flex-col md:flex-row items-start space-y-5 md:space-y-0 md:space-x-10">
+            {/* Skeleton for Product Image */}
+            <Skeleton className="w-full md:w-1/2 h-[400px] rounded-lg shadow-lg" />
+
+            <div className="w-full md:w-1/2 space-y-4">
+              {/* Skeleton for Product Name */}
+              <Skeleton className="h-8 w-3/4" />
+
+              {/* Skeleton for Item Price */}
+              <Skeleton className="h-4 w-1/3" />
+              <Skeleton className="h-4 w-1/4" />
+              <Skeleton className="h-4 w-1/4" />
+
+              {/* Skeleton for Description */}
+              {/* <Skeleton className="h-16 w-full" /> */}
+
+              {/* Skeleton for Brand and Additional Info */}
+              <Skeleton className="h-4 w-1/3" />
+              <Skeleton className="h-4 w-1/2" />
+
+              {/* Skeleton for Add to Cart Button */}
+              <Skeleton className="h-12 w-full md:w-1/2 rounded-md" />
+
+              {/* Skeleton for Additional Images */}
+              <div className="flex space-x-4">
+                {[...Array(2)].map((_, index) => (
+                  <Skeleton
+                    key={index}
+                    className="w-40 h-24 object-cover rounded-md shadow-md"
+                  />
+                ))}
+              </div>
             </div>
           </div>
         ) : (
@@ -51,11 +77,11 @@ const ProductDetails = () => {
                 <img
                   src={displayedImage || product.mainImage}
                   alt={product.productName}
-                  className="w-full md:w-1/2 h-auto object-cover rounded-lg shadow-lg"
+                  className="w-full md:w-[500px] h-[500px] object-cover rounded-lg shadow-lg"
                 />
 
                 {/* Product Details */}
-                <div className="w-full md:w-1/2">
+                <div className="w-full md:w-[500px]">
                   {/* Product Name */}
                   <h1 className="text-3xl font-bold text-gray-900 mb-4">
                     {product.productName}
@@ -150,7 +176,7 @@ const ProductDetails = () => {
         )}
       </div>
 
-      <Footer className="mt-4" /> {/* Adjust margin if needed */}
+      <Footer className="mt-4" />
     </div>
   );
 };
