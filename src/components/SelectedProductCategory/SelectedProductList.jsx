@@ -130,11 +130,11 @@ const SelectedProductList = () => {
             <SelectContent>
               <SelectGroup>
                 <SelectItem value="all">No Filter</SelectItem> {/* Use "all" instead of "" */}
-                <SelectItem value="0-500">₹0 - ₹500</SelectItem>
                 <SelectItem value="500-1000">₹500 - ₹1000</SelectItem>
-                <SelectItem value="1000-2000">₹1000 - ₹2000</SelectItem>
-                <SelectItem value="2000-5000">₹2000 - ₹5000</SelectItem>
-                <SelectItem value="5000-10000">₹5000 - ₹10000</SelectItem>
+                <SelectItem value="1000-5000">₹1000 - ₹5000</SelectItem>
+                <SelectItem value="5000-20000">₹5000 - ₹20000</SelectItem>
+                <SelectItem value="20000-50000">₹20000 - ₹50000</SelectItem>
+                <SelectItem value="50000-10000">₹50000 - ₹100000</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
