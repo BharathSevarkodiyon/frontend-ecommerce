@@ -68,8 +68,8 @@ const SelectedProductList = () => {
         const [minPrice, maxPrice] = selectedPriceRange.split("-");
         filteredProductsByCategory = filteredProductsByCategory.filter(
           (product) =>
-            product.sellingPrice >= parseInt(minPrice) &&
-            product.sellingPrice <= parseInt(maxPrice)
+            product.sellingPrice.$numberDecimal >= parseInt(minPrice) &&
+            product.sellingPrice.$numberDecimal <= parseInt(maxPrice)
         );
       }
 
