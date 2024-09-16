@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "../Provider/AuthContext";
 import AuthenticateNavbar from "../navbar/AuthenticateNavbar";
+import { Toaster } from "sonner";
 
 export function SignupForm() {
   const [firstName, setFirstName] = useState("");
@@ -47,7 +48,13 @@ export function SignupForm() {
       <AuthenticateNavbar/>
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-xl text-center">Sign Up</CardTitle>
+        <div className="flex justify-center">
+            <img 
+            src="https://generated-assets.prod.myninja.ai/be20b773-b2c7-4e6e-ae7d-0dd29dde7958/cd1eb8f9-fe48-43e9-959b-3ef5da2b6fbd_2.jpeg" 
+            className="w-10 h-10 rounded-full object-cover"
+            alt="Logo" />
+          </div>
+          <CardTitle className="text-xl text-center">Sign up to BuzzBee</CardTitle>
           <CardDescription className="text-center">
             Enter your information to create an account
           </CardDescription>
@@ -136,6 +143,7 @@ export function SignupForm() {
             </Link>
           </div>
         </CardContent>
+      <Toaster richColors position="bottom-right" duration={3000}  expand={false}/>
       </Card>
     </div>
   );
