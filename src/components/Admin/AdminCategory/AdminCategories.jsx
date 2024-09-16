@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useProducts } from "@/components/Provider/ProductProvider";
 import { toast } from "sonner";
 import { HiOutlinePencilAlt, HiOutlineTrash, HiOutlinePlusCircle } from "react-icons/hi";
+import { Toaster } from "sonner";
 
 const AdminCategories = () => {
   const { categories, fetchCategories, createCategory, updateCategory, deleteCategory } = useProducts();
@@ -52,8 +53,8 @@ const AdminCategories = () => {
   const handleDelete = async (id) => {
     toast.custom(
       (t) => (
-        <div className="bg-white p-4 rounded-lg shadow-lg">
-          <p className="mb-4">Are you sure you want to delete this category?</p>
+        <div className="bg-white p-4 w-96 rounded-lg shadow-lg">
+          <p className="mb-4 ">Are you sure you want to delete this category?</p>
           <div className="flex justify-end space-x-2">
             <button
               className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
@@ -88,6 +89,7 @@ const AdminCategories = () => {
 
   return (
     <div className="p-8">
+      <Toaster richColors position="top-center"  expand={false}/>
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-3xl font-bold">Manage Categories</h2>
         <button
