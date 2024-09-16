@@ -10,19 +10,23 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../Provider/AuthContext";
 import AuthenticateNavbar from "../navbar/AuthenticateNavbar";
+import { Toaster } from "sonner";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, loading } = useAuth();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const redirectUrl = searchParams.get("redirect") || "/";
 
   const handleLogin = async () => {
-    await login(email, password);
-    setEmail("");
-    setPassword("");
+      await login(email, password, redirectUrl);
+      setEmail("");
+      setPassword("");
   };
 
   return (
@@ -76,6 +80,7 @@ export function LoginForm() {
             Sign up
           </Link>
         </div>
+      <Toaster richColors position="bottom-right" duration={3000}  expand={false}/>
       </Card>
     </div>
   );
