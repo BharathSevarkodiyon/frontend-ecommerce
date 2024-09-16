@@ -14,7 +14,7 @@ import {
 import Cookies from "js-cookie"; // Import js-cookie
 import { useCart } from "../Provider/CartProvider";
 
-const BackNavigation = () => {
+const BackNavigation = ({currentURL}) => {
   const { fetchUserById, logout, user } = useAuth(); // Include fetchUserById and logout function
   const { products } = useProducts(); // Fetch products from ProductProvider
   const { cartData } = useCart();
@@ -27,6 +27,12 @@ const BackNavigation = () => {
 
   // Toggle dropdown visibility
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  const redirect = currentURL
+
+  const handleLogin = ()=>{
+    navigate(`/login?redirect=${redirect}`);
+  }
 
   // Logout function
   const handleLogout = () => {
@@ -193,12 +199,20 @@ const BackNavigation = () => {
                 )}
               </div>
             ) : (
-              <Link
-                to="/login"
+              // old
+              // <Link
+              //   to="/login"
+              //   className="text-black px-4 py-2 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none"
+              // >
+              //   Login / Signup
+              // </Link>
+              // New
+              <button
+                onClick={handleLogin}
                 className="text-black px-4 py-2 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none"
               >
                 Login / Signup
-              </Link>
+              </button>
             )}
           </div>
         </div>
@@ -258,5 +272,3 @@ const BackNavigation = () => {
 };
 
 export default BackNavigation;
-
-// Used in Selected product category and product details
