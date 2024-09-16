@@ -4,7 +4,7 @@ import { useProducts } from "../Provider/ProductProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Provider/AuthContext";
 import CartNavbar from "../navbar/CartNavbar";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Skeleton } from "../ui/skeleton";
 import Footer from "../Footer/Footer";
@@ -20,16 +20,32 @@ const Cart = () => {
   const productId = searchParams.get("productId");
   const [cartInitialized, setCartInitialized] = useState(false);
   const [isFetchingCart, setIsFetchingCart] = useState(true); // Loading state for fetching cart
+  const [isLoading, setIsLoading] = useState(true); // New loading state for 2-second delay
 
+  // Fetch cart data when the user logs in
   useEffect(() => {
     if (user) {
-      setIsFetchingCart(true); // Start loading
-      getCart(user._id).then(() => setIsFetchingCart(false)); // End loading after fetching cart
+      setIsFetchingCart(true); // Start fetching cart
+      getCart(user._id).then(() => {
+        setIsFetchingCart(false); // End fetching cart
+      });
     } else {
       setIsFetchingCart(false); // End loading if user is not logged in
     }
   }, [user, getCart]);
 
+  // Add a 2-second loading delay before displaying the cart content
+  useEffect(() => {
+    if (!isFetchingCart) {
+      const delay = setTimeout(() => {
+        setIsLoading(false); // End the 2-second delay
+      }, 2000); // 2-second delay
+
+      return () => clearTimeout(delay); // Clean up the timeout if the component unmounts
+    }
+  }, [isFetchingCart]);
+
+  // Add product to cart if it's passed in the URL
   useEffect(() => {
     if (user && productId && !cartInitialized && !isFetchingCart) {
       const product = products.find((product) => product._id === productId);
@@ -57,7 +73,7 @@ const Cart = () => {
 
   const handleRemoveItem = (item) => {
     toast.custom((t) => (
-      <div className="bg-white p-4 rounded-lg shadow-lg">
+      <div className="bg-white p-4 w-[500px] rounded-lg shadow-lg">
         <p className="mb-4">Are you sure you want to remove this item from your cart?</p>
         <div className="flex justify-end space-x-2">
           <button
@@ -109,11 +125,12 @@ const Cart = () => {
 
   return (
     <div className="bg-purple-100 w-screen min-h-screen flex flex-col">
+      <Toaster richColors position="bottom-center" expand={false} />
       <CartNavbar />
       <div className="flex-grow mx-auto w-screen p-4 mt-[64px]">
         <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
-        {isFetchingCart ? (
-          // Display loading skeleton while fetching cart data
+        {isFetchingCart || isLoading ? (
+          // Display loading skeleton while fetching cart data or during the 2-second delay
           <div className="flex justify-center items-center space-x-4">
             <Skeleton className="h-12 w-12 rounded-full" />
             <div className="space-y-2">
@@ -198,7 +215,7 @@ const Cart = () => {
           </div>
         )}
       </div>
-      <Footer className="mt-auto"/>
+      <Footer className="mt-auto" />
     </div>
   );
 };
