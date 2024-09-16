@@ -32,6 +32,7 @@ const Checkout = () => {
     city: "",
     pincode: "",
   });
+  const [originalPincode, setOriginalPincode] = useState("");
 
   const fetchCart = useCallback(async () => {
     if (user) {
@@ -87,6 +88,7 @@ const Checkout = () => {
         city: user.city,
         pincode: user.pincode,
       });
+      setOriginalPincode(user.pincode);
     }
   }, [user]);
 
@@ -122,7 +124,7 @@ const Checkout = () => {
     }
 
     // Check pincode length
-    if (pincode.length !== 6) {
+    if (pincode !== originalPincode && pincode.length !== 6) {
       toast.error("Pincode must be exactly 6 digits");
       return;
     }
