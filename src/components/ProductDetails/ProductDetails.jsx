@@ -187,9 +187,10 @@ const ProductDetails = () => {
                           key={index}
                           src={image}
                           alt={`Additional ${index + 1}`}
-                          className="w-24 h-24 object-cover rounded-md shadow-md"
+                          className="w-24 h-24 object-cover rounded-md shadow-md transition-all duration-300 ease-in-out hover:scale-105"
                           onMouseEnter={() => setDisplayedImage(image)}
                           onMouseLeave={() => setDisplayedImage(null)}
+                          style={{ width: "100px", height: "100px" }}
                         />
                       ))}
                     </div>
