@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useProducts } from "@/components/Provider/ProductProvider";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { HiOutlinePencilAlt, HiOutlineTrash, HiOutlinePlusCircle } from "react-icons/hi";
 import ProductForm from "./ProductForm";
 import Modal from "./Modal"; // Import the Modal component
@@ -161,11 +161,13 @@ const AdminProduct = () => {
 
   if (!user || user.role !== 'admin') {
     // If not admin, do not render the component and show a toast
+    toast.error("Not a Admin user.");
     return null;
   }
 
   return (
     <div className="p-8">
+      <Toaster richColors position="top-center"  expand={false}/>
       <h1 className="text-3xl font-bold mb-8">Admin - Manage Products</h1>
       <div className="flex justify-end mb-4">
         <button
