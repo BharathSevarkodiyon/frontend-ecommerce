@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProducts } from "../Provider/ProductProvider";
 import BackNavigation from "../BackNavigation/BackNavigation";
-import { Toaster } from "sonner";
 import Footer from "../Footer/Footer";
 import { Skeleton } from "@/components/ui/skeleton"; // Import Skeleton
+import { useAuth } from "../Provider/AuthContext";
+import { toast, Toaster } from "sonner";
 
 const ProductDetails = () => {
   const { productName } = useParams();
   const { products } = useProducts();
+  const { user } = useAuth()
   const navigate = useNavigate();
 
   // State to handle image hover
@@ -17,21 +19,50 @@ const ProductDetails = () => {
 
   useEffect(() => {
     // Simulate loading delay or data fetching
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer); // Cleanup
+    const timer = setTimeout(() => setLoading(false), 1000); // Replace with actual data fetching
+    return () => clearTimeout(timer);
   }, []);
 
   const product = products.find(
     (product) => product.productName === productName
   );
 
+  const getCurrentUrl = `/product-details/${productName}`
+
   const handleAddToCart = () => {
-    navigate(`/cart?productId=${product._id}`);
+    if (user) {
+      // If user is logged in, navigate to the cart
+      navigate(`/cart?productId=${product._id}`);
+    } else {
+      // If user is not logged in, show a toast asking if they want to log in
+      toast.custom((t) => (
+        <div className="bg-white p-4 w-[500px] rounded-lg shadow-lg">
+          <p className="mb-4">You need to be logged in, to add items to your cart. Do you want to log in now?</p>
+          <div className="flex justify-end space-x-2">
+            <button
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              onClick={() => {
+                toast.dismiss(t); // Dismiss the toast
+                navigate(`/login?redirect=${getCurrentUrl}`); // Redirect to login page
+              }}
+            >
+              Yes
+            </button>
+            <button
+              className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
+              onClick={() => toast.dismiss(t)} // Dismiss the toast
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ));
+    }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-purple-100">
-      <BackNavigation />
+      <BackNavigation currentURL={getCurrentUrl}/>
 
       <div className="flex-grow max-w-screen-lg mx-auto p-5 mt-[120px] sm:mt-16">
         {loading ? (
@@ -47,9 +78,6 @@ const ProductDetails = () => {
               <Skeleton className="h-4 w-1/3" />
               <Skeleton className="h-4 w-1/4" />
               <Skeleton className="h-4 w-1/4" />
-
-              {/* Skeleton for Description */}
-              {/* <Skeleton className="h-16 w-full" /> */}
 
               {/* Skeleton for Brand and Additional Info */}
               <Skeleton className="h-4 w-1/3" />
@@ -143,7 +171,6 @@ const ProductDetails = () => {
 
                   {/* Add to Cart Button */}
                   <div className="flex justify-end mb-4">
-                    <Toaster richColors />
                     <button
                       className="bg-blue-600 text-white font-bold py-2 px-4 rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out"
                       onClick={handleAddToCart}
@@ -175,7 +202,7 @@ const ProductDetails = () => {
           </>
         )}
       </div>
-
+        <Toaster richColors position="bottom-center" duration={10000}/>
       <Footer className="mt-4" />
     </div>
   );
