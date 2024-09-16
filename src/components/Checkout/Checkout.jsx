@@ -182,7 +182,6 @@ const Checkout = () => {
   return (
     <div>
   <CartNavbar />
-  <Toaster richColors position="top-right" />
   {/* Responsive Layout Container */}
   <div className="p-5 w-full mx-auto bg-violet-100 flex flex-col lg:flex-row lg:space-x-5">
     {/* Left Side: Product Display */}
