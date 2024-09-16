@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useOrders } from "@/components/Provider/OrderProvider"; // Import order provider
 import { useAuth } from "@/components/Provider/AuthContext"; // Import auth provider
 import { useProducts } from "@/components/Provider/ProductProvider"; // Import product provider
-import { toast } from "sonner"; // Import toast for notifications
+import { toast, Toaster } from "sonner"; // Import toast for notifications
 
 const ViewOrders = () => {
   const { fetchOrders, updateOrderStatus } = useOrders(); // Get the fetchOrders and updateOrderStatus functions from the order provider
@@ -84,6 +84,7 @@ const ViewOrders = () => {
 
   return (
     <div>
+      <Toaster richColors position="top-center"  expand={false}/>
       <h2 className="text-2xl font-bold mb-4">Orders</h2>
       {loading ? (
         <p>Loading orders...</p> // Show a loading indicator while fetching orders
