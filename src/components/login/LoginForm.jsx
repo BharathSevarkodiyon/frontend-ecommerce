@@ -54,6 +54,7 @@ export function LoginForm() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter at least 8 characters"
               required
             />
           </div>
