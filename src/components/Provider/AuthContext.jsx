@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     })
 
-    const login = async (email, password) => {
+    const login = async (email, password, redirectUrl) => {
       setLoading(true);
       try {
         const response = await axios.post(`https://backend-ecommerce-wqir.onrender.com/login`, { email, password });
@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   
         toast.success("Logged in successfully!");
         setTimeout(()=>{
-          navigate("/");
+          navigate(redirectUrl);
         }, 3000);
   
       } catch (error) {
