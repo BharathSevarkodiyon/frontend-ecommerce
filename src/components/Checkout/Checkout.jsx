@@ -10,7 +10,7 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useOrders } from "../Provider/OrderProvider";
 import CartNavbar from "../navbar/CartNavbar";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 
 const Checkout = () => {
   const { getCart, cartDetails } = useCart();
