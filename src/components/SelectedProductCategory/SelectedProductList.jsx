@@ -82,10 +82,10 @@ const SelectedProductList = () => {
   const handleProductClick = (productName) => {
     navigate(`/product-details/${productName}`);
   };
-
+  const getCurrentUrl = `/product/${categoryName}`
   return (
     <div className="min-h-screen flex flex-col bg-violet-50">
-      <BackNavigation />
+      <BackNavigation currentURL={getCurrentUrl}/>
 
       {/* Main Content Wrapper */}
       <div className="flex-grow mt-[118px] md:mt-20 flex flex-col items-end mr-6">
