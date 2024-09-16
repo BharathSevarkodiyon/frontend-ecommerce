@@ -10,6 +10,7 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useOrders } from "../Provider/OrderProvider";
 import CartNavbar from "../navbar/CartNavbar";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { toast, Toaster } from "sonner";
 
 const Checkout = () => {
   const { getCart, cartDetails } = useCart();
@@ -19,7 +20,7 @@ const Checkout = () => {
   const { id: cartId } = useParams();
   const navigate = useNavigate();
 
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -98,16 +99,39 @@ const Checkout = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setAddress((prev) => ({
-      ...prev,
-      [name]: name === "pincode" ? Number(value) : value,
-    }));
+    // Handle pincode validation
+    if (name === "pincode") {
+      if (value.length > 6) return;
+      setAddress((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    } else {
+      setAddress((prev) => ({
+        ...prev,
+        [name]: name === "pincode" ? Number(value) : value,
+      }));
+    }
   };
 
   const handleAddressSubmit = async () => {
+    const { shippingAddress, billingAddress, state, city, pincode } = address;
+
+    // Check for empty fields
+    if (!shippingAddress || !billingAddress || !state || !city || !pincode) {
+      toast.error("Please fill all address fields");
+      return;
+    }
+
+    // Check pincode length
+    if (pincode.length !== 6) {
+      toast.error("Pincode must be exactly 6 digits");
+      return;
+    }
+
     try {
       const response = await axios.patch(
-        `https://backend-ecommerce-wqir.onrender.com/user/${user._id}`,
+        `${baseUrl}/user/${user._id}`,
         address,
         {
           withCredentials: true,
@@ -115,9 +139,10 @@ const Checkout = () => {
       );
       updateUser({ ...user, ...response.data });
       setShowAddressPopup(false);
-      // console.log("Address updated successfully");
+      toast.success("Address updated successfully");
     } catch (error) {
       console.error("Failed to update address", error);
+      toast.error("Failed to update address");
     }
   };
 
@@ -154,14 +179,10 @@ const Checkout = () => {
     setShowAddressPopup(true);
   };
 
-  // if (loading) return <Skeleton />;
-
-  // if (error) return <p>{error}</p>;
-
   return (
     <div>
   <CartNavbar />
-
+  <Toaster richColors position="top-right" />
   {/* Responsive Layout Container */}
   <div className="p-5 w-full mx-auto bg-violet-100 flex flex-col lg:flex-row lg:space-x-5">
     {/* Left Side: Product Display */}
