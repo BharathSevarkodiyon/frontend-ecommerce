@@ -10,7 +10,7 @@ import { HiOutlinePencilAlt } from "react-icons/hi";
 import { useOrders } from "../Provider/OrderProvider";
 import CartNavbar from "../navbar/CartNavbar";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 
 const Checkout = () => {
   const { getCart, cartDetails } = useCart();
@@ -182,6 +182,7 @@ const Checkout = () => {
   return (
     <div>
   <CartNavbar />
+  <Toaster richColors position="top-right" />
   {/* Responsive Layout Container */}
   <div className="p-5 w-full mx-auto bg-violet-100 flex flex-col lg:flex-row lg:space-x-5">
     {/* Left Side: Product Display */}
