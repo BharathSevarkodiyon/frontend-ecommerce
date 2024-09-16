@@ -40,7 +40,7 @@ function AppContent() {
         <OrderProvider>
           {/* Conditionally render Navbar only for non-admin users */}
           {/* {(!user || user.role !== "admin") && <Navbar />} */}
-          <Toaster richColors />
+          {/* <Toaster richColors /> */}
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/signup" element={<SignupForm />} />
