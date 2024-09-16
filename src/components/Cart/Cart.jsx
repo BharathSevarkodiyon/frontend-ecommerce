@@ -4,7 +4,7 @@ import { useProducts } from "../Provider/ProductProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../Provider/AuthContext";
 import CartNavbar from "../navbar/CartNavbar";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Skeleton } from "../ui/skeleton";
 import Footer from "../Footer/Footer";
@@ -125,6 +125,7 @@ const Cart = () => {
 
   return (
     <div className="bg-purple-100 w-screen min-h-screen flex flex-col">
+      <Toaster richColors position="bottom-center" expand={false} />
       <CartNavbar />
       <div className="flex-grow mx-auto w-screen p-4 mt-[64px]">
         <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
