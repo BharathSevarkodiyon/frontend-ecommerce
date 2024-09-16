@@ -30,7 +30,13 @@ export function LoginForm() {
       <AuthenticateNavbar/>
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Login</CardTitle>
+          <div className="flex justify-center">
+            <img 
+            src="https://generated-assets.prod.myninja.ai/be20b773-b2c7-4e6e-ae7d-0dd29dde7958/cd1eb8f9-fe48-43e9-959b-3ef5da2b6fbd_2.jpeg" 
+            className="w-10 h-10 rounded-full object-cover"
+            alt="Logo" />
+          </div>
+          <CardTitle className="text-2xl text-center">Sign in to BuzzBee</CardTitle>
           <CardDescription className="text-center">
             Enter your email below to login to your account.
           </CardDescription>
