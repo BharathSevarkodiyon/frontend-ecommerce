@@ -4,7 +4,7 @@ import { FaArrowLeft, FaBox, FaChevronDown, FaShoppingCart, FaSignOutAlt, FaUser
 import { useAuth } from '../Provider/AuthContext';
 import Cookies from 'js-cookie';
 
-const CartNavbar = () => {
+const CartNavbar = ({ currentURL }) => {
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false); // State to manage dropdown visibility
 
@@ -12,6 +12,11 @@ const CartNavbar = () => {
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
+  const redirect = currentURL
+  const handleLogin = ()=>{
+    navigate(`/login?redirect=${redirect}`);
+  }
+  
   // Logout function
   const handleLogout = () => {
     logout();
@@ -85,12 +90,18 @@ const CartNavbar = () => {
                 )}
               </div>
             ) : (
-              <Link
-                to="/login"
+              // <Link
+              //   to="/login"
+              //   className="text-black px-4 py-2 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none"
+              // >
+              //   Login / Signup
+              // </Link>
+              <button 
+                onClick={handleLogin}
                 className="text-black px-4 py-2 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none"
               >
                 Login / Signup
-              </Link>
+              </button>
             )}
           </div>
         </div>
