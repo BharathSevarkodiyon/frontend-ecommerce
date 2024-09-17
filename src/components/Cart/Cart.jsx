@@ -122,11 +122,13 @@ const Cart = () => {
       console.error("Cart ID is not available");
     }
   };
-
+  
+  const getCurrentUrl = `/cart?productId=${productId}`;
+  
   return (
     <div className="bg-purple-100 w-screen min-h-screen flex flex-col">
       <Toaster richColors position="bottom-center" expand={false} />
-      <CartNavbar />
+      <CartNavbar currentURL={getCurrentUrl} />
       <div className="flex-grow mx-auto w-screen p-4 mt-[64px]">
         <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
         {isFetchingCart || isLoading ? (
